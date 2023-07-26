@@ -18,6 +18,8 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## ⚙ Ferramentas e Dependências
 - [@rocketseat/eslint-config](https://github.com/rocketseat/eslint-config-rocketseat)
+- [react-icons](https://github.com/react-icons/react-icons)
+- [webfontloader](https://github.com/typekit/webfontloader)
 
 ---
 
@@ -41,7 +43,7 @@ O #boracodar é um repositório referente à todos os projetos construídos dura
       <td align="center">1</td>
       <td>Music Player</td>
       <td align="center">
-        <a target="_blank" href="https://www.figma.com/file/XnielIsj9qrix1qxAQLT9X/23boraCodar-Desafio-1/duplicate">
+        <a target="_blank" href="https://www.figma.com/file/XnielIsj9qrix1qxAQLT9X/23boraCodar-Desafio-1">
           🎨
         </a>
       </td>
