@@ -1,34 +1,85 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# #boraCodar
 
-## Getting Started
+<div align="center">
+  <img width="80%" src="./.github/preview.png" />
+</div>
 
-First, run the development server:
+---
 
+## 🚀 Tecnologias
+Esse projeto foi desenvolvido com as seguintes tecnologias:
+- [Next.js](https://nextjs.org/)
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind com PostCSS](https://tailwindcss.com/)
+- [ESLint](https://eslint.org/)
+
+---
+
+## ⚙ Ferramentas e Dependências
+- [@rocketseat/eslint-config](https://github.com/rocketseat/eslint-config-rocketseat)
+
+---
+
+## 💻 Projeto
+O #boracodar é um repositório referente à todos os projetos construídos durante as semanas intensivas do Bora Codar, da Rocketseat
+
+---
+
+## 🎨 Layout e 'projetinhos'
+
+<table>
+  <thead>
+    <th>ID</th>
+    <th>Nome</th>
+    <th>Layout</th>
+    <th>Código</th>
+    <th>URL</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">1</td>
+      <td>Music Player</td>
+      <td align="center">
+        <a href="https://www.figma.com/file/XnielIsj9qrix1qxAQLT9X/23boraCodar-Desafio-1/duplicate">
+          🎨
+        </a>
+      </td>
+      <td align="center">
+        <a href="#">
+          💻
+        </a>
+      </td>
+      <td align="center">
+        <a href="#">
+          🌐
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+## 💻 Acesse o Projeto
+
+### ✅ Requisitos
+Antes de tudo, você precisa ter o [Git](https://git-scm.com/) e o [Node.js](https://nodejs.org/en) instalados.
+
+### 🏁 Passo a passo
 ```bash
+# Clone o projeto
+git clone https://github.com/Gustavo-Nasc/Bora-Codar
+
+# Acesse a pasta do projeto
+cd Bora-Codar/
+
+# Instale as dependências
+npm i
+
+# Execute o projeto (Em ambiente de desenvolvimento)
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+
+# O servidor será inicializado e poderá ser acessado pela porta 3000 no localhost
+# localhost:3000
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
