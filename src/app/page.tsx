@@ -15,7 +15,7 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="p-6 bg-main">
+    <main className="p-6 bg-main min-h-screen">
       <h1 className="font-secondary text-center font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl">
         #bora<span className="text-logo">codar</span>
       </h1>
