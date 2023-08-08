@@ -1,6 +1,6 @@
-import 'Player.css'
+import './Player.css'
 
-import { ForwardRefRenderFunction, forwardRef, useState } from 'react'
+import React, { ForwardRefRenderFunction, RefObject, forwardRef, useState } from 'react'
 import {
   FaPlay,
   FaPause,
@@ -13,17 +13,18 @@ import ReactPlayer from 'react-player'
 
 type PlayerProps = {
   url: string
+  ref: RefObject<ReactPlayer>
 }
 
 const Player: ForwardRefRenderFunction<ReactPlayer, PlayerProps> = (
-  { url },
-  ref,
+  { url, ref },
 ) => {
   // CONFIGURAÇÕES DO PLAYER
   const [playing, setPlaying] = useState(false)
   const [muted, setMuted] = useState(false)
   const [loop, setLoop] = useState(false)
   const [volume, setVolume] = useState(1)
+  const [duration, setDuration] = useState<number | undefined>(0)
 
   // FUNÇÕES DO PLAYER
 
@@ -49,6 +50,10 @@ const Player: ForwardRefRenderFunction<ReactPlayer, PlayerProps> = (
 
     document.getElementById('loop')?.classList.toggle('hidden')
     document.getElementById('unloop')?.classList.toggle('hidden')
+  }
+
+  function handleDuration() {
+    setDuration(ref.current?.getDuration())
   }
 
   return (
@@ -89,6 +94,7 @@ const Player: ForwardRefRenderFunction<ReactPlayer, PlayerProps> = (
           setVolume(parseFloat(event.target.value))
         }}
       />
+      <p onLoad={handleDuration}>{duration}</p>
     </div>
   )
 }
