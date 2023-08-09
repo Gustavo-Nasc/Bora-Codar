@@ -1,29 +1,18 @@
-.slider {
-  @apply
-    appearance-none
-    w-full
-    h-4
-    transition-all
-    duration-300
-    opacity-75
-    rounded-full
-    bg-[#0F0D13]
-  ;
-}
-
-.slider:hover {
-  @apply
-    opacity-100
-  ;
-}
-
 .slider::-webkit-slider-thumb {
   @apply
     appearance-none
-    w-6
-    h-6
+    w-5
+    h-5
     cursor-pointer
     bg-white
     rounded-full
+  ;
+}
+
+.slider-time::-webkit-slider-thumb {
+  @apply
+    appearance-none
+    w-3
+    h-full
   ;
 }

@@ -31,7 +31,13 @@ export default function MusicPlayer() {
 
   // Mutar / Desmutar
   function handleMuteClick() {
-    muted ? setMuted(false) : setMuted(true)
+    if (muted) {
+      setMuted(false)
+      setVolume(1)
+    } else {
+      setMuted(true)
+      setVolume(0)
+    }
 
     document.getElementById('mute')?.classList.toggle('hidden')
     document.getElementById('unmute')?.classList.toggle('hidden')
@@ -67,6 +73,17 @@ export default function MusicPlayer() {
     setDuration(minutes + seconds)
   }
 
+  function handleMouseEnter() {
+    const volume = document.getElementById('volume')
+
+    volume?.classList.toggle('block')
+    volume?.classList.toggle('hidden')
+    volume?.classList.toggle('w-36')
+    volume?.classList.toggle('w-0')
+    volume?.classList.toggle('opacity-100')
+    volume?.classList.toggle('opacity-0')
+  }
+
   return (
     <main className="bg-[#0F0D13] min-h-screen flex flex-col gap-6 items-center justify-center p-6">
       <form onSubmit={handleSubmitURLForm} className="flex gap-3 items-center">
@@ -95,9 +112,20 @@ export default function MusicPlayer() {
           />
         </div>
         <div className="flex justify-between">
-          <button onClick={handleMuteClick}>
-            <FaVolumeHigh size={32} id="unmute" />
-            <FaVolumeXmark size={32} className="hidden" id="mute" />
+          <button onClick={handleMuteClick} className="relative">
+            <FaVolumeHigh size={32} id="unmute" onDoubleClick={handleMouseEnter} />
+            <FaVolumeXmark size={32} className="hidden" id="mute" onDoubleClick={handleMouseEnter} />
+            <input
+              type="range"
+              step=".01"
+              className="hidden absolute bottom-2 left-10 appearance-none w-0 h-4 transition-all opacity-0 duration-300 opacity-75 rounded-full bg-[#0F0D13] hover:opacity-100 slider"
+              id="volume"
+              max={1}
+              value={volume}
+              onChange={(event) => {
+                setVolume(parseFloat(event.target.value))
+              }}
+            />
           </button>
           <button onClick={handlePlayClick}>
             <FaPlay size={32} id="play" />
@@ -108,26 +136,17 @@ export default function MusicPlayer() {
             <FaRotate size={32} className="hidden" id="unloop" />
           </button>
         </div>
-        <input
-          type="range"
-          step=".01"
-          className="slider"
-          max={1}
-          value={volume}
-          onChange={(event) => {
-            setVolume(parseFloat(event.target.value))
-          }}
-        />
         {url && (
           <div>
             <input
               type="range"
+              disabled
               value={currentTime}
-              className="w-full bg-black"
+              className="w-full h-1 appearance-none bg-white rounded-full slider-time"
             />
             <div className="flex justify-between">
               <p>0:00</p>
-              <p>{duration?.toString().replaceAll('.', ':')}</p>
+              <p>{duration?.toFixed(2).toString().replaceAll('.', ':')}</p>
             </div>
           </div>
         )}
