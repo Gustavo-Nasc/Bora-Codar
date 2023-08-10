@@ -10,8 +10,9 @@ import {
   FaRotate,
   FaMagnifyingGlass,
 } from 'react-icons/fa6'
-import ReactPlayer from 'react-player'
 import './styles/Player.css'
+import ReactPlayer from 'react-player'
+import { Timer } from './components/Timer'
 
 export default function MusicPlayer() {
   // Referências
@@ -67,10 +68,11 @@ export default function MusicPlayer() {
   }, [])
 
   function handleDuration() {
-    const minutes = Math.floor(playerRef.current?.getDuration() / 60)
-    const seconds = (playerRef.current?.getDuration() % 60) / 100
+    // const minutes = Math.floor(playerRef.current?.getDuration() / 60)
+    // const seconds = (playerRef.current?.getDuration() % 60) / 100
 
-    setDuration(minutes + seconds)
+    // setDuration(minutes + seconds)
+    setDuration(playerRef.current?.getDuration())
   }
 
   function handleMouseEnter() {
@@ -82,6 +84,15 @@ export default function MusicPlayer() {
     volume?.classList.toggle('w-0')
     volume?.classList.toggle('opacity-100')
     volume?.classList.toggle('opacity-0')
+
+    setTimeout(() => {
+      volume?.classList.toggle('block')
+      volume?.classList.toggle('hidden')
+      volume?.classList.toggle('w-36')
+      volume?.classList.toggle('w-0')
+      volume?.classList.toggle('opacity-100')
+      volume?.classList.toggle('opacity-0')
+    }, 5000)
   }
 
   return (
@@ -99,6 +110,7 @@ export default function MusicPlayer() {
 
       <div className="bg-[#2A2141] w-full max-w-2xl p-6 rounded-xl flex flex-col gap-6">
         <div className="relative w-full h-max">
+          <div className="absolute w-full h-full" />
           <ReactPlayer
             url={url}
             playing={playing}
@@ -109,31 +121,42 @@ export default function MusicPlayer() {
             className="rounded-xl"
             width="100%"
             onReady={handleDuration}
+            onPause={() => setPlaying(false)}
           />
         </div>
-        <div className="flex justify-between">
-          <button onClick={handleMuteClick} className="relative">
-            <FaVolumeHigh size={32} id="unmute" onDoubleClick={handleMouseEnter} />
-            <FaVolumeXmark size={32} className="hidden" id="mute" onDoubleClick={handleMouseEnter} />
-            <input
-              type="range"
-              step=".01"
-              className="hidden absolute bottom-2 left-10 appearance-none w-0 h-4 transition-all opacity-0 duration-300 opacity-75 rounded-full bg-[#0F0D13] hover:opacity-100 slider"
-              id="volume"
-              max={1}
-              value={volume}
-              onChange={(event) => {
-                setVolume(parseFloat(event.target.value))
-              }}
+        <div className="flex justify-between relative">
+          <button onClick={handleMuteClick} onMouseEnter={handleMouseEnter}>
+            <FaVolumeHigh size={32} id="unmute" title="Mutar" />
+            <FaVolumeXmark
+              size={32}
+              className="hidden"
+              id="mute"
+              title="Desmutar"
             />
           </button>
+          <input
+            type="range"
+            step=".01"
+            className="hidden absolute top-2 left-10 appearance-none w-0 h-4 transition-all duration-300 opacity-0 rounded-full bg-[#0F0D13] hover:opacity-100 slider"
+            id="volume"
+            max={1}
+            value={volume}
+            onChange={(event) => {
+              setVolume(parseFloat(event.target.value))
+            }}
+          />
           <button onClick={handlePlayClick}>
-            <FaPlay size={32} id="play" />
-            <FaPause size={32} className="hidden" id="pause" />
+            <FaPlay size={32} id="play" title="Continuar" />
+            <FaPause size={32} className="hidden" id="pause" title="Pausar" />
           </button>
           <button onClick={handleLoopClick}>
-            <FaRotateLeft size={32} id="loop" />
-            <FaRotate size={32} className="hidden" id="unloop" />
+            <FaRotateLeft size={32} id="loop" title="Loop" />
+            <FaRotate
+              size={32}
+              className="hidden"
+              id="unloop"
+              title="Tirar do Loop"
+            />
           </button>
         </div>
         {url && (
@@ -148,6 +171,11 @@ export default function MusicPlayer() {
               <p>0:00</p>
               <p>{duration?.toFixed(2).toString().replaceAll('.', ':')}</p>
             </div>
+            <Timer
+              expiryTimestamp={new Date().setSeconds(
+                new Date().getSeconds() + duration,
+              )}
+            />
           </div>
         )}
       </div>
