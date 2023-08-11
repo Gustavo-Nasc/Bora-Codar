@@ -19,13 +19,16 @@ export default function MusicPlayer() {
   const playerRef = useRef<ReactPlayer>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
+  const time = new Date()
+  time.setSeconds(time.getSeconds() + 600)
+
   // CONFIGURAÇÕES DO PLAYER
   const [url, setUrl] = useState<string | undefined>(undefined)
   const [playing, setPlaying] = useState(false)
   const [muted, setMuted] = useState(false)
   const [loop, setLoop] = useState(false)
   const [volume, setVolume] = useState(1)
-  const [duration, setDuration] = useState<number | undefined>(undefined)
+  const [duration, setDuration] = useState<Date>(time)
   const [currentTime, setCurrentTime] = useState<number | undefined>(0)
 
   // FUNÇÕES DO PLAYER
@@ -72,7 +75,8 @@ export default function MusicPlayer() {
     // const seconds = (playerRef.current?.getDuration() % 60) / 100
 
     // setDuration(minutes + seconds)
-    setDuration(playerRef.current?.getDuration())
+    const time = new Date()
+    time.setSeconds(time.getSeconds() + playerRef.current?.getDuration())
   }
 
   function handleMouseEnter() {
@@ -169,15 +173,11 @@ export default function MusicPlayer() {
             />
             <div className="flex justify-between">
               <p>0:00</p>
-              <p>{duration?.toFixed(2).toString().replaceAll('.', ':')}</p>
+              <p>{duration?.toLocaleTimeString()}</p>
             </div>
-            <Timer
-              expiryTimestamp={new Date().setSeconds(
-                new Date().getSeconds() + duration,
-              )}
-            />
           </div>
         )}
+        <Timer expiryTimestamp={time} />
       </div>
     </main>
   )

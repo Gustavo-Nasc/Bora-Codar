@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useTimer } from 'react-timer-hook'
 
 type TimerProps = {
@@ -5,20 +6,49 @@ type TimerProps = {
 }
 
 export function Timer({ expiryTimestamp }: TimerProps) {
-  const { hours, minutes, seconds, start, pause, resume } = useTimer({
+  const { totalSeconds, hours, minutes, seconds, pause, resume } = useTimer({
     expiryTimestamp,
   })
 
+  const [time, setTime] = useState(totalSeconds)
+
+  ;(function handlePause() {
+    const buttonPause = document.getElementById('pause')
+
+    buttonPause?.addEventListener('click', pause)
+  })()
+  ;(function handlePlay() {
+    const buttonPlay = document.getElementById('play')
+
+    buttonPlay?.addEventListener('click', resume)
+  })()
+
   return (
-    <div style={{ textAlign: 'center' }}>
-      <h1>react-timer-hook </h1>
-      <p>Timer Demo</p>
-      <div style={{ fontSize: '100px' }}>
-        <span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
+    <div>
+      <input
+        type="range"
+        value={time}
+        max={totalSeconds}
+        className="w-full h-9 rounded-full slider-time"
+      />
+      <div className="flex justify-between">
+        <p>0:00</p>
+        <p>
+          {hours > 0 && (
+            <>
+              <span>{hours}</span>:
+            </>
+          )}
+          {minutes > 0 && (
+            <>
+              <span>{minutes}</span>:
+            </>
+          )}
+          {seconds < 10 && 0}
+          <span>{parseInt(seconds.toFixed(2))}</span>
+        </p>
       </div>
-      <button onClick={start}>Start</button>
-      <button onClick={pause}>Pause</button>
-      <button onClick={resume}>Resume</button>
+      <p>{totalSeconds}</p>
     </div>
   )
 }
